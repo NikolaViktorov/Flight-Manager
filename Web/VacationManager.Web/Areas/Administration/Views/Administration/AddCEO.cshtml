@@ -1,0 +1,34 @@
+﻿@using VacationManager.Web.ViewModels.Administration;
+
+@model CEOInputModel
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="text-align: center; color: lightgray">Добави ново CEO</h1>
+        <form class="mx-auto half-width col-5" enctype="multipart/form-data" method="post" asp-action="AddCEO">
+            <div class="top-border-line primary-separator"></div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="suls-text-color">Е-мейл на човека който искате да направите CEO</label>
+                <input asp-for="Email" class="form-control" placeholder="Е-мейл...">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="suls-text-color">Първо име на CEO</label>
+                <input asp-for="FirstName" class="form-control" placeholder="Първо име...">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="suls-text-color">Фамилия на CEO</label>
+                <input asp-for="LastName" class="form-control" placeholder="Фамилия...">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="top-border-line primary-separator"></div>
+
+            <button type="submit" class="btn forum-add-bg-color">Добави CEO</button>
+        </form>
+    </div>
+</div>

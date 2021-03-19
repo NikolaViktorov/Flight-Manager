@@ -1,0 +1,21 @@
+﻿@using VacationManager.Web.ViewModels.CEO;
+
+@model IEnumerable<CustomerViewModel>
+
+<div>
+    <div class="customer-container">
+        @foreach (CustomerViewModel customer in Model)
+        {
+            <div class="customer">
+                <h1>@customer.Email</h1>
+                <p>@customer.FirstName @customer.LastName</p>
+                <a class="customer-details" href="/CEO/CEO/CustomerDetails?customerId=@customer.CustomerId">Детайли</a>
+                <a class="customer-remove" href="/CEO/CEO/RemoveCustomer?customerId=@customer.CustomerId" 
+                   onclick="return confirm('Сигурни ли сте? Акаунтът на @customer.FirstName @customer.LastName ще бъде изтрит завинаги!')">
+                    Изтрий клиент
+                </a>
+            </div>
+            <br/>
+        }
+    </div>
+</div>
