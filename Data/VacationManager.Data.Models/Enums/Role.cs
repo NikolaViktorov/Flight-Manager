@@ -6,5 +6,6 @@
         TeamLead = 1,
         Developer = 2,
         CEO = 3,
+        Administrator = 4,
     }
 }

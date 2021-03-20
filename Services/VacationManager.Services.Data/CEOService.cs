@@ -7,6 +7,7 @@
 
     using Microsoft.EntityFrameworkCore;
     using VacationManager.Data;
+    using VacationManager.Data.Models.Enums;
     using VacationManager.Services.Data.Contracts;
     using VacationManager.Web.ViewModels.CEO;
 
@@ -17,6 +18,11 @@
         public CEOService(ApplicationDbContext db)
         {
             this.db = db;
+        }
+
+        public Task AddClientToTeam(string customerId, string teamId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task DeleteCustomerAccount(string customerId)
@@ -35,13 +41,28 @@
         public async Task<ICollection<CustomerViewModel>> GetAll()
         {
             // Change to given amount
-            return await this.db.Users.Select(u => new CustomerViewModel()
+            return await this.db.Users.Where(u => u.RoleId != (int)Role.CEO && u.RoleId != (int)Role.Administrator).Select(u => new CustomerViewModel()
             {
                 CustomerId = u.Id,
                 Email = u.Email,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
             }).ToListAsync();
+        }
+
+        public async Task<AvailableTeamsViewModel> GetAvailableTeams(string customerId)
+        {
+            return new AvailableTeamsViewModel()
+            {
+                CustomerId = customerId,
+                AvailableTeams = this.db.Teams.Select(t => new AvailableTeamViewModel()
+                {
+                    TeamId = t.TeamId,
+                    CurrentProjectName = t.Project.Name,
+                    LeaderName = t.Leader.FirstName + " " + t.Leader.LastName,
+                    Name = t.Name,
+                }),
+            };
         }
 
         public async Task<CustomerDetailsViewModel> GetCustomer(string customerId)

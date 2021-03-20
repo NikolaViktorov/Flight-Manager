@@ -97,7 +97,9 @@
             {
                 var user = new ApplicationUser { UserName = Input.Username, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName, Role = Input.Role };
 
-                var curRoleId = this.db.Roles.FirstOrDefault(r => r.Name == this.Input.Role.ToString()).Id;
+                var role = this.Input.Role.ToString() == "TeamLead" ? "Team Lead" : this.Input.Role.ToString();
+
+                var curRoleId = this.db.Roles.FirstOrDefault(r => r.Name == role)?.Id;
 
                 var result = await this._userManager.CreateAsync(user, Input.Password);
 

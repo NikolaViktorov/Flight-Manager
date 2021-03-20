@@ -12,5 +12,9 @@
         public Task DeleteCustomerAccount(string customerId);
 
         public Task<CustomerDetailsViewModel> GetCustomer(string customerId);
+
+        public Task<AvailableTeamsViewModel> GetAvailableTeams(string customerId);
+
+        public Task AddClientToTeam(string customerId, string teamId);
     }
 }
