@@ -1,0 +1,29 @@
+﻿@using VacationManager.Web.ViewModels.Teams;
+
+@model IEnumerable<TeamViewModel>
+
+<div>
+    @*Check if user does not have team - Show his team or Option to create one*@
+    <a asp-controller="Teams" asp-action="CreateTeam">Създай свой отбор!</a>
+
+    <div class="teams-container">
+        @if (Model.Count() == 0)
+        {
+            <h1>Няма отбори!</h1>
+        }
+        else
+        {
+            @foreach (TeamViewModel team in Model)
+            {
+                <div class="team">
+                    <h1>@team.Name</h1>
+                    <h2>Воден он @team.LeaderName</h2>
+                    <p>Отборът @team.Name в момента работи по проект наречен @team.CurrentProjectName</p>
+                    <p>Работници в момента: @team.EmployeesCount</p>
+                    <a asp-action="TeamDetails" asp-controller="Teams" asp-route-id="@team.TeamId">Виж повече</a>
+                </div>
+                <br />
+            }
+        }
+    </div>
+</div>
