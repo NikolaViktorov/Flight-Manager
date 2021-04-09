@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Project_Flight_Manager-16AC9775-6117-44BA-9228-21BCB089232D</UserSecretsId>
+    <RootNamespace>Project_Flight_Manager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200222232742_ReservationCreate.cs" />
+    <Compile Remove="Data\Migrations\20200222232742_ReservationCreate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200227165911_Flights.cs" />
+    <Compile Remove="Data\Migrations\20200227165911_Flights.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200229163513_RegisterCreate.cs" />
+    <Compile Remove="Data\Migrations\20200229163513_RegisterCreate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200229163755_RegisterUpdate.cs" />
+    <Compile Remove="Data\Migrations\20200229163755_RegisterUpdate.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\image\" />
+  </ItemGroup>
+
+</Project>

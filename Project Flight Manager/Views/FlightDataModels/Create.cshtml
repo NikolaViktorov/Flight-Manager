@@ -1,0 +1,90 @@
+﻿@model Project_Flight_Manager.Models.FlightDataModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<style>
+    h1{
+        margin: 10px 40px 30px 470px;
+        color:white;
+    }
+    .col-md-4 {
+        background-color: black;
+        opacity: 0.6;
+        color: white;
+        font-weight: bold;
+        margin: 3px 3px 3px 3px;
+        left: 35%;
+        top: 40%;
+    }
+</style>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AirlineID" class="control-label"></label>
+                <input asp-for="AirlineID" class="form-control" />
+                <span asp-validation-for="AirlineID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AirlineName" class="control-label"></label>
+                <input asp-for="AirlineName" class="form-control" />
+                <span asp-validation-for="AirlineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FromLocation" class="control-label"></label>
+                <input asp-for="FromLocation" class="form-control" />
+                <span asp-validation-for="FromLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToLocation" class="control-label"></label>
+                <input asp-for="ToLocation" class="form-control" />
+                <span asp-validation-for="ToLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepatureTime" class="control-label"></label>
+                <input asp-for="DepatureTime" class="form-control" />
+                <span asp-validation-for="DepatureTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArrivalTime" class="control-label"></label>
+                <input asp-for="ArrivalTime" class="form-control" />
+                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotName" class="control-label"></label>
+                <input asp-for="PilotName" class="form-control" />
+                <span asp-validation-for="PilotName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessCapacity" class="control-label"></label>
+                <input asp-for="BusinessCapacity" class="form-control" />
+                <span asp-validation-for="BusinessCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,67 @@
+﻿@using Project_Flight_Manager.Models;
+
+@model IEnumerable<ReservationDataModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Reservation</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EGN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (ReservationDataModel item in Model) {
+        <tr>
+            <td>
+                @item.MiddleName
+            </td>
+            <td>
+                @item.LastName
+            </td>
+            <td>
+                @item.EGN
+            </td>
+            <td>
+                @item.TelNumber
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketType)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FirstName">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FirstName">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FirstName">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
