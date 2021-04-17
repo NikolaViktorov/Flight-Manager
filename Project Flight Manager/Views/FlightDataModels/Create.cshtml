@@ -7,18 +7,32 @@
 <h1>Create</h1>
 <style>
     h1{
-        margin: 10px 40px 30px 470px;
+       text-align: center;
         color:white;
     }
     .col-md-4 {
-        background-color: black;
-        opacity: 0.6;
         color: white;
         font-weight: bold;
-        margin: 3px 3px 3px 3px;
-        left: 35%;
-        top: 40%;
+        border-radius:5px;
     }
+    .row{
+        justify-content: center;
+        
+        background-color: rgba(163, 167, 204, 0.5);
+    }
+    .btn{
+        float: right;
+        margin-bottom: 10px;
+    }
+    .back-btn{
+        position: absolute;
+        top: 14%;
+        padding: 9px 15px;
+        border: 0 none;
+        color: #ffffff;
+        box-shadow: none;
+        border-radius: 7px;
+        }
 </style>
 
 
@@ -85,6 +99,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn-primary back-btn" asp-action="Index">Back to List</a>
 </div>
 

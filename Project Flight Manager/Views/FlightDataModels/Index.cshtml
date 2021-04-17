@@ -10,17 +10,73 @@
         color:white;
     }
     .table{
-        background-color:black;
-        opacity:0.6;
-        color:white;
-        font-weight:bold;
+        border-collapse: collapse;
+        margin: 25px 0;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        background-color: rgba(163, 167, 204, 0.5);
+    }
+    .table thead tr {
+        background-color:  #007299;
+        color: #ffffff;
+        text-align: center;
+    }
+    .table th,
+    .table td {
+        padding: 5px 11px;
+        font-size: 15px;
+    }
+    .table td {
+        
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+    }
+    .table th {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+    
+    .table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
 
+    .table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .table tbody tr:last-of-type {
+        border-bottom: 2px solid  #007299;;
+    }
+    .table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    }
+    .last-cell{
+        display:flex;
+    }
+    .separator{
+    margin: 0px 5px;
+    color: #009879;
+    }
+
+    .btn{
+        margin-top:15px;
+        padding: 0;
+    }
+    .create-btn{
+        padding: 9px 15px;
+        border: 0 none;
+        color: #ffffff;
+        background: #007299;
+        box-shadow: none;
+        margin-top: 15px;
+        border-radius: 7px;
     }
    
 
 </style>
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn">
+    <a class="create-btn" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -85,13 +141,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BusinessCapacity)
             </td>
-            <td>
+            <td class="last-cell">
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 { 
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <p class="separator"> | </p>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 }
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <p class="separator"> | </p>
                 <a asp-controller="ReservationDataModels" asp-action="Create">Buy</a>
             </td>
         </tr>
