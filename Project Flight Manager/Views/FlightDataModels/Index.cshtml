@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Project_Flight_Manager.Models.FlightDataModel>
+﻿@using Project_Flight_Manager.ViewModels.Flights
+@using Project_Flight_Manager.ViewModels.Administration
+
+@model PaginatedList<FlightViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,64 +9,73 @@
 
 <h1>Create Flights</h1>
 <style>
-    h1{
-        color:white;
+    h1 {
+        color: white;
     }
-    .table{
+
+    .table {
         border-collapse: collapse;
         margin: 25px 0;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         text-align: center;
         background-color: rgba(163, 167, 204, 0.5);
     }
-    .table thead tr {
-        background-color:  #007299;
-        color: #ffffff;
-        text-align: center;
-    }
-    .table th,
-    .table td {
-        padding: 5px 11px;
-        font-size: 15px;
-    }
-    .table td {
-        
-        border-left: 1px solid white;
-        border-right: 1px solid white;
-    }
-    .table th {
-        border-left: 1px solid black;
-        border-right: 1px solid black;
-    }
-    
-    .table tbody tr {
-        border-bottom: 1px solid #dddddd;
+
+        .table thead tr {
+            background-color: #007299;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .table th,
+        .table td {
+            padding: 5px 11px;
+            font-size: 15px;
+        }
+
+        .table td {
+            border-left: 1px solid white;
+            border-right: 1px solid white;
+        }
+
+        .table th {
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+            .table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+            .table tbody tr:last-of-type {
+                border-bottom: 2px solid #007299;
+                ;
+            }
+
+            .table tbody tr.active-row {
+                font-weight: bold;
+                color: #009879;
+            }
+
+    .last-cell {
+        display: flex;
     }
 
-    .table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
+    .separator {
+        margin: 0px 5px;
+        color: #009879;
     }
 
-    .table tbody tr:last-of-type {
-        border-bottom: 2px solid  #007299;;
-    }
-    .table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
-    }
-    .last-cell{
-        display:flex;
-    }
-    .separator{
-    margin: 0px 5px;
-    color: #009879;
-    }
-
-    .btn{
-        margin-top:15px;
+    .btn {
+        margin-top: 15px;
         padding: 0;
     }
-    .create-btn{
+
+    .create-btn {
         padding: 9px 15px;
         border: 0 none;
         color: #ffffff;
@@ -72,87 +84,102 @@
         margin-top: 15px;
         border-radius: 7px;
     }
-   
-
 </style>
-<p class="btn">
-    <a class="create-btn" asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AirlineID)
+                <a asp-controller="FlightDataModels" asp-action="Index" asp-route-filter="airlineId">Airline ID</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AirlineName)
+                <a asp-controller="FlightDataModels" asp-action="Index" asp-route-filter="airlineName">Airline Name</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FromLocation)
+                From Location
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToLocation)
+                To Location
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DepatureTime)
+                Depature Time
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
+                Arrival Time
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PilotName)
+                Pilot Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacity)
+                Capacity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BusinessCapacity)
+                Business Capacity
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AirlineID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AirlineName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepatureTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PilotName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusinessCapacity)
-            </td>
-            <td class="last-cell">
-                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-                { 
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <p class="separator"> | </p>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                }
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <p class="separator"> | </p>
-                <a asp-controller="ReservationDataModels" asp-action="Create">Buy</a>
-            </td>
-        </tr>
-}
+        @foreach (FlightViewModel flight in Model)
+        {
+            <tr>
+                <td>
+                    @flight.AirlineID
+                </td>
+                <td>
+                    @flight.AirlineName
+                </td>
+                <td>
+                    @flight.FromLocation
+                </td>
+                <td>
+                    @flight.ToLocation
+                </td>
+                <td>
+                    @flight.DepatureTime
+                </td>
+                <td>
+                    @flight.ArrivalTime
+                </td>
+                <td>
+                    @flight.PilotName
+                </td>
+                <td>
+                    @flight.Capacity
+                </td>
+                <td>
+                    @flight.BusinessCapacity
+                </td>
+                <td class="last-cell">
+                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@flight.FlightId">Edit</a>
+                        <p class="separator"> | </p>
+                        <a asp-action="Delete" asp-route-id="@flight.FlightId">Delete</a>
+                        <p class="separator"> | </p>
+                    }
+                    <a asp-action="Details" asp-route-id="@flight.FlightId">Details</a>
+                    <p class="separator"> | </p>
+                    <a asp-controller="ReservationDataModels" asp-action="Create" asp-route-flightId="@flight.FlightId">Buy</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-controller="FlightDataModels"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-controller="FlightDataModels"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

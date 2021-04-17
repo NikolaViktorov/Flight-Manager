@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project_Flight_Manager.Data;
 using Project_Flight_Manager.Models;
+using Project_Flight_Manager.Services.Contracts;
+using Project_Flight_Manager.ViewModels.Reservations;
 
 namespace Project_Flight_Manager.Controllers
 {
     public class ReservationDataModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IReservationsService reservationsService;
 
-        public ReservationDataModelsController(ApplicationDbContext context)
+        public ReservationDataModelsController(ApplicationDbContext context, IReservationsService reservationsService)
         {
             _context = context;
+            this.reservationsService = reservationsService;
         }
 
         // GET: ReservationDataModels
@@ -34,8 +38,7 @@ namespace Project_Flight_Manager.Controllers
                 return NotFound();
             }
 
-            var reservationDataModel = await _context.Reservations
-                .FirstOrDefaultAsync(m => m.FirstName == id);
+            var reservationDataModel = await this.reservationsService.ReservationDetails(id);
             if (reservationDataModel == null)
             {
                 return NotFound();
@@ -45,25 +48,25 @@ namespace Project_Flight_Manager.Controllers
         }
 
         // GET: ReservationDataModels/Create
-        public IActionResult Create()
+        public IActionResult Create(string flightId)
         {
-            return View();
+            var model = new ReservationInputModel()
+            {
+                FlightId = flightId,
+            };
+            return View(model);
         }
 
-        // POST: ReservationDataModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,MiddleName,LastName,EGN,TelNumber,Nationality,TicketType")] ReservationDataModel reservationDataModel)
+        public async Task<IActionResult> Create(ReservationInputModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reservationDataModel);
-                await _context.SaveChangesAsync();
+                await this.reservationsService.CreateReservation(model);
                 return RedirectToAction(nameof(Index));
             }
-            return View(reservationDataModel);
+            return View(model);
         }
 
         // GET: ReservationDataModels/Edit/5
@@ -79,27 +82,29 @@ namespace Project_Flight_Manager.Controllers
             {
                 return NotFound();
             }
-            return View(reservationDataModel);
+            var model = new ReservationEditInputModel()
+            {
+                FirstName = reservationDataModel.FirstName,
+                LastName = reservationDataModel.LastName,
+                EGN = reservationDataModel.EGN,
+                MiddleName = reservationDataModel.MiddleName,
+                Nationality = reservationDataModel.Nationality,
+                TelNumber = reservationDataModel.TelNumber,
+                TicketType = reservationDataModel.TicketType,
+                ReservationId = id,
+            };
+            return View(model);
         }
 
-        // POST: ReservationDataModels/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FirstName,MiddleName,LastName,EGN,TelNumber,Nationality,TicketType")] ReservationDataModel reservationDataModel)
+        public async Task<IActionResult> Edit(ReservationEditInputModel reservationDataModel)
         {
-            if (id != reservationDataModel.FirstName)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(reservationDataModel);
-                    await _context.SaveChangesAsync();
+                    await this.reservationsService.EditReservation(reservationDataModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,7 +122,6 @@ namespace Project_Flight_Manager.Controllers
             return View(reservationDataModel);
         }
 
-        // GET: ReservationDataModels/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -135,8 +139,7 @@ namespace Project_Flight_Manager.Controllers
             return View(reservationDataModel);
         }
 
-        // POST: ReservationDataModels/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {

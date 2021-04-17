@@ -1,4 +1,4 @@
-﻿@model Project_Flight_Manager.Models.ReservationDataModel
+﻿@model Project_Flight_Manager.ViewModels.Reservations.ReservationInputModel
 
 @{
     ViewData["Title"] = "Create";
@@ -82,11 +82,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="TicketType" class="control-label"></label>
-                <input asp-for="TicketType" class="form-control" />
+                <select asp-for="TicketType" class="form-control" >
+                    <option value="0">
+                        Normal
+                    </option>
+                    <option value="1">
+                        Business
+                    </option>
+                </select>
                 <span asp-validation-for="TicketType" class="text-danger"></span>
             </div>
+            <input asp-for="FlightId" hidden class="form-control hide" value="@Model.FlightId" />
             <div class="form-group">
-                <input class=" btn-primary create-btn" type="submit" value="Create" class="btn btn-primary" />
+                <input class="btn-primary create-btn" type="submit" value="Create" />
             </div>
         </form>
     </div>

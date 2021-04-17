@@ -1,20 +1,15 @@
 ﻿using Project_Flight_Manager.Models.Enum;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Project_Flight_Manager.Models
+namespace Project_Flight_Manager.ViewModels.Reservations
 {
-    public class ReservationDataModel
+    public class ReservationInputModel
     {
-        public ReservationDataModel()
-        {
-            this.ReservationId = Guid.NewGuid().ToString();
-        }
-
-        [Key]
-        public string ReservationId { get; set; }
-
-        [Required(ErrorMessage ="Enter your First name")]
+        [Required(ErrorMessage = "Enter your First name")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -26,7 +21,7 @@ namespace Project_Flight_Manager.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Enter your EGN") ]
+        [Required(ErrorMessage = "Enter your EGN")]
         public int EGN { get; set; }
 
         [Required(ErrorMessage = "Enter your Phone number")]
@@ -40,8 +35,6 @@ namespace Project_Flight_Manager.Models
         [Display(Name = "Ticket Type")]
         public TicketType TicketType { get; set; }
 
-        public virtual string FlightId { get; set; }
-
-        public virtual FlightDataModel Flight { get; set; }
+        public string FlightId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Project_Flight_Manager.Models.ReservationDataModel
+﻿@model Project_Flight_Manager.ViewModels.Reservations.ReservationDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -18,41 +18,53 @@
     <h4>Reservation Details</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MiddleName)
+        <dt class="col-sm-2">
+            First Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MiddleName)
+        <dd class="col-sm-10">
+            @Model.FirstName
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
+        <dt class="col-sm-2">
+            Middle Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+        <dd class="col-sm-10">
+            @Model.MiddleName
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EGN)
+        <dt class="col-sm-2">
+            Last Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EGN)
+        <dd class="col-sm-10">
+            @Model.LastName
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TelNumber)
+        <dt class="col-sm-2">
+            EGN
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TelNumber)
+        <dd class="col-sm-10">
+            @Model.EGN
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nationality)
+        <dt class="col-sm-2">
+            Telephone Number
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nationality)
+        <dd class="col-sm-10">
+            @Model.TelNumber
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketType)
+        <dt class="col-sm-2">
+            Nationality
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketType)
+        <dd class="col-sm-10">
+            @Model.Nationality
+        </dd>
+        <dt class="col-sm-2">
+            Ticket Type
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TicketType
+        </dd>
+        <dt class="col-sm-2">
+            Airlines Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FlightName
         </dd>
     </dl>
 </div>

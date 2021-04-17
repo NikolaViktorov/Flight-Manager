@@ -1,0 +1,51 @@
+﻿@using Project_Flight_Manager.ViewModels.Administration
+
+@model PaginatedList<UserViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-controller="Administration" asp-action="Users" asp-route-filter="email">Email</a>
+            </th>
+            <th>
+                <a asp-controller="Administration" asp-action="Users" asp-route-filter="username">Username</a>
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (UserViewModel user in Model)
+        {
+            <tr>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Username
+                </td>
+                <td>
+                    <a onclick="confirm('Delete user?')" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@user.UserId">Delete User</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Users"
+   asp-controller="Administration" 
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Users"
+    asp-controller="Administration" 
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

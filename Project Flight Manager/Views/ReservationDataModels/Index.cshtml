@@ -78,9 +78,6 @@
 
 <h1>Reservation</h1>
 
-<p>
-    <a class="create-btn" asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -127,9 +124,14 @@
                 @Html.DisplayFor(modelItem => item.TicketType)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.FirstName">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FirstName">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FirstName">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> 
+                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                {
+                    <span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a> 
+                    <span>|</span>
+                    <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a>
+                }
             </td>
         </tr>
 }

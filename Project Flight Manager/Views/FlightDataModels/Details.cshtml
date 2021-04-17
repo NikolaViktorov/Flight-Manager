@@ -1,4 +1,6 @@
-﻿@model Project_Flight_Manager.Models.FlightDataModel
+﻿@using Project_Flight_Manager.ViewModels.Reservations
+
+@model Project_Flight_Manager.ViewModels.Flights.FlightDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -7,77 +9,108 @@
 
 
 <style>
-    .content{
-        color:white;
+    .content {
+        color: white;
         background-color: rgba(163, 167, 204, 0.2);
         padding: 10px;
-        }
+    }
 </style>
 
 <div class="content">
 
-<h1>Details</h1>
+    <h1>Details</h1>
     <h4>FlightDataModel</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AirlineID)
+        <dt class="col-sm-2">
+            Airline ID
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AirlineID)
+        <dd class="col-sm-10">
+            @Model.AirlineID
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AirlineName)
+        <dt class="col-sm-2">
+            Airline Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AirlineName)
+        <dd class="col-sm-10">
+            @Model.AirlineName
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FromLocation)
+        <dt class="col-sm-2">
+            From Location
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FromLocation)
+        <dd class="col-sm-10">
+            @Model.FromLocation
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToLocation)
+        <dt class="col-sm-2">
+            To Location
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToLocation)
+        <dd class="col-sm-10">
+            @Model.ToLocation
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DepatureTime)
+        <dt class="col-sm-2">
+            Depature Time
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DepatureTime)
+        <dd class="col-sm-10">
+            @Model.DepatureTime
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ArrivalTime)
+        <dt class="col-sm-2">
+            Flight Duration
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ArrivalTime)
+        <dd class="col-sm-10">
+            @Model.FlightDuration hours
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PilotName)
+        <dt class="col-sm-2">
+            Pilot Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PilotName)
+        <dd class="col-sm-10">
+            @Model.PilotName
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capacity)
+        <dt class="col-sm-2">
+            Capacity
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacity)
+        <dd class="col-sm-10">
+            @Model.Capacity
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BusinessCapacity)
+        <dt class="col-sm-2">
+            Business Capacity
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BusinessCapacity)
+        <dd class="col-sm-10">
+            @Model.BusinessCapacity
         </dd>
     </dl>
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <p>Reservations made for this flight:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Ticket Type
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ReservationUserViewModel user in Model.Reservations)
+            {
+                <tr>
+                    <td>
+                        @user.FirstName
+                    </td>
+                    <td>
+                        @user.LastName
+                    </td>
+                    <td>
+                        @user.TicketType.ToString()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.FlightId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>

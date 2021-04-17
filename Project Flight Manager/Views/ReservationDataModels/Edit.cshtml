@@ -1,20 +1,22 @@
-﻿@model Project_Flight_Manager.Models.ReservationDataModel
+﻿@model Project_Flight_Manager.ViewModels.Reservations.ReservationEditInputModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 <style>
-    .content{
-        color:white;
+    .content {
+        color: white;
         background-color: rgba(163, 167, 204, 0.2);
         display: flex;
         flex-direction: column;
-        align-items:center;
+        align-items: center;
     }
+
     .col-md-4 {
-    max-width: fit-content;
+        max-width: fit-content;
     }
-      .back-btn{
+
+    .back-btn {
         position: absolute;
         top: 10%;
         left: 17%;
@@ -23,66 +25,93 @@
         color: #ffffff;
         box-shadow: none;
         border-radius: 7px;
-        }
-        
-        .form-group{
-        color:white;
-        font-weight:bold;
+    }
+
+    .form-group {
+        color: white;
+        font-weight: bold;
         width: max-content;
-        .btn{
-        margin-left:133px;
-        }
+    }
+    .btn
+    {
+        margin-left: 133px;
+    }
 </style>
 
 <div class="content">
-<h1>Edit</h1>
+    <h1>Edit</h1>
 
-<h4>ReservationDataModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="FirstName" />
-            <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
-                <input asp-for="MiddleName" class="form-control" />
-                <span asp-validation-for="MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EGN" class="control-label"></label>
-                <input asp-for="EGN" class="form-control" />
-                <span asp-validation-for="EGN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TelNumber" class="control-label"></label>
-                <input asp-for="TelNumber" class="form-control" />
-                <span asp-validation-for="TelNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nationality" class="control-label"></label>
-                <input asp-for="Nationality" class="form-control" />
-                <span asp-validation-for="Nationality" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TicketType" class="control-label"></label>
-                <input asp-for="TicketType" class="form-control" />
-                <span asp-validation-for="TicketType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>ReservationDataModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" value="@Model.FirstName"/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MiddleName" class="control-label"></label>
+                    <input asp-for="MiddleName" class="form-control" value="@Model.MiddleName"/>
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" value="@Model.LastName"/>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EGN" class="control-label"></label>
+                    <input asp-for="EGN" class="form-control" value="@Model.EGN"/>
+                    <span asp-validation-for="EGN" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TelNumber" class="control-label"></label>
+                    <input asp-for="TelNumber" class="form-control" value="@Model.TelNumber"/>
+                    <span asp-validation-for="TelNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nationality" class="control-label"></label>
+                    <input asp-for="Nationality" class="form-control" value="@Model.Nationality"/>
+                    <span asp-validation-for="Nationality" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TicketType" class="control-label"></label>
+                    <select asp-for="TicketType" class="form-control">
+                        @if (Model.TicketType == 0)
+                        {
+                            <option selected value="0">
+                                Normal
+                            </option>
+                            <option value="1">
+                                Business
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="0">
+                                Normal
+                            </option>
+                            <option selected value="1">
+                                Business
+                            </option>
+                        }
+
+                    </select>
+                    <span asp-validation-for="TicketType" class="text-danger"></span>
+                </div>
+                <input asp-for="ReservationId" hidden class="form-control hide" value="@Model.ReservationId" />
+                <div class="form-group">
+                    <input class="btn-primary create-btn" type="submit" value="Edit" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a class="btn-primary back-btn" asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a class="btn-primary back-btn" asp-action="Index">Back to List</a>
+    </div>
 </div>
 
